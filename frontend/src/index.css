@@ -405,6 +405,13 @@ html, body, #root {
   overflow: hidden;
 }
 
+.inference-view {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  height: 100%;
+  overflow: hidden;
+}
+
 .graph-zone {
   grid-column: 1;
   grid-row: 1;

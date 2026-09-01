@@ -1,129 +1,85 @@
-# NeuronLedger 🧠🔗
+# 🧠 NeuronLedger: Graph Neural AI with Verifiable Memory
 
-> **A Graph Neural AI with Verifiable Memory on a Blockchain-Like Audit Layer**
+NeuronLedger is an advanced, full-stack cybersecurity and data-analysis platform that merges **3D Data Visualization**, **Artificial Intelligence**, and **Web3 Blockchain Cryptography**.
 
-NeuronLedger is a research-grade AI intelligence system that learns from relational data, detects patterns in graphs, and records every decision in a tamper-evident proof ledger.
+![Dashboard](assets/dashboard.png)
+
+## 📖 The Problem
+In traditional systems, when an AI flags a threat (like a cyber attack or a money-laundering syndicate), the AI operates as a "black box". A rogue database administrator could secretly alter the AI’s report in the database to hide their tracks. 
+
+**NeuronLedger solves this** by generating immutable, cryptographically verifiable proof of every AI conclusion on a public blockchain.
+
+## ✨ Core Features
+
+### 1. 3D Neural Visualizer
+Instead of flat, unreadable tables, NeuronLedger ingests massive datasets and renders them as a dynamic, physics-based 3D floating web. 
+![Anomaly Details](assets/anomaly.png)
+
+### 2. Graph Mathematics Engine
+Beneath the visual layer, the Python backend runs rigorous structural algorithms (like **PageRank**, **Louvain Clustering**, and **Degree Centrality**) to find abnormal spikes and hidden networks.
+
+### 3. AI Forensic Brain
+We feed the raw mathematical outputs directly into the **Google Gemini LLM**. Acting as a cybersecurity expert, the AI reads the math and translates it into a human-readable forensic report.
+![Inference Explanation](assets/inference.png)
+
+### 4. The Cryptographic Proof Ledger
+The exact moment the AI generates its report, the backend compresses the entire state (input data, graph state, AI output) into a single SHA-256 **Merkle Root**. Using Web3, a transaction is broadcast to the **Ethereum Sepolia Testnet**. If anyone attempts to alter the AI's report in the database, the cryptographic hash breaks, instantly flagging an "Integrity Breach".
 
 ---
 
-## What it does
+## 🚀 Quick Start Guide
 
-| Feature | Technology |
-|---|---|
-| Graph construction | NetworkX directed graphs |
-| Anomaly detection | Isolation Forest (scikit-learn) |
-| Community detection | Louvain algorithm |
-| Trust scoring | Weighted PageRank |
-| Explainability | BFS influence path tracing |
-| Proof ledger | SHA-256 Merkle hash chain |
-| 3D visualization | Three.js + react-three-fiber |
-| API | FastAPI + SQLite |
+Follow these steps to run NeuronLedger locally.
 
----
+### Prerequisites
+- Python 3.12+
+- Node.js (v18+)
+- An Alchemy API Key (for Ethereum Sepolia)
+- A Google Gemini API Key
 
-## Quick Start
-
-### 1. Start the Backend
-
+### 1. Backend Setup (FastAPI)
+Open a terminal and run:
 ```bash
 cd backend
 python -m venv venv
-# Windows:
+
+# Windows
 .\venv\Scripts\activate
-# macOS/Linux:
+# Mac/Linux
 source venv/bin/activate
 
 pip install -r requirements.txt
+```
+
+Create a `.env` file in the `backend/` folder:
+```env
+GEMINI_API_KEY=your_gemini_key_here
+WEB3_PROVIDER_URI=your_alchemy_sepolia_url_here
+WALLET_PRIVATE_KEY=your_ethereum_wallet_private_key
+```
+
+Run the backend:
+```bash
 uvicorn main:app --reload --port 8000
 ```
 
-Backend runs at: http://localhost:8000  
-API docs: http://localhost:8000/docs
-
-### 2. Start the Frontend
-
+### 2. Frontend Setup (React/Vite)
+Open a second terminal and run:
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Frontend runs at: http://localhost:5173
+The app will be available at `http://localhost:5173`.
 
 ---
 
-## Architecture
+## ☁️ Deployment Guide (Vercel & Render)
 
-```
-Data Input (CSV/JSON)
-       ↓
- Graph Builder (NetworkX)
-       ↓
- AI Engine
-  ├── Isolation Forest (anomaly detection)
-  ├── Louvain clustering (community detection)
-  ├── PageRank (trust scoring)
-  └── BFS path tracing (explainability)
-       ↓
- Proof Ledger (SHA-256 Merkle chain)
-  ├── graph_state_hash
-  ├── input_hash
-  ├── output_hash
-  ├── previous_hash (chain link)
-  └── merkle_root + HMAC signature
-       ↓
- 3D Visualization (Three.js)
-```
+**Can you host the backend on Vercel?**
+While Vercel is incredible for frontend hosting, it is **not recommended** for this backend. Vercel uses "Serverless Functions" which spin up and down constantly. This means local files like our `neuronledger.db` SQLite database would be wiped out every few minutes, and long-running mathematical graph algorithms might time out.
 
----
-
-## Sample Datasets
-
-Three datasets are pre-loaded on startup:
-
-1. **Wallet Transfer Network** — crypto wallet graph with money laundering patterns
-2. **Research Citation Network** — academic paper citation graph
-3. **Social Interaction Network** — user communication graph with spam detection
-
----
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/ingest/csv` | Upload CSV transaction file |
-| POST | `/api/ingest/json` | Upload JSON graph |
-| GET | `/api/graphs` | List all graphs |
-| GET | `/api/graphs/{id}` | Get graph with full data |
-| POST | `/api/inference` | Run AI analysis on a graph |
-| GET | `/api/inference` | List all inference runs |
-| GET | `/api/ledger` | Get full proof chain |
-| GET | `/api/ledger/verify` | Verify chain integrity |
-
----
-
-## The Proof Ledger
-
-Every inference creates a chain-linked entry:
-
-```json
-{
-  "entry_index": 0,
-  "graph_state_hash": "sha256...",
-  "input_hash": "sha256...",
-  "output_hash": "sha256...",
-  "previous_hash": "sha256...",
-  "merkle_root": "sha256...",
-  "verification_signature": "hmac-sha256...",
-  "timestamp": "2024-01-01T00:00:00Z"
-}
-```
-
-Altering any entry breaks the chain — detectable immediately.
-
----
-
-## Author
-
-**Tejas Tayade** — NeuronLedger 2026  
-MIT License
+**Recommended Deployment Stack:**
+1. **Frontend:** Deploy the `frontend/` folder to **Vercel** or Netlify. It works perfectly there!
+2. **Backend:** Deploy the `backend/` folder to **Render** or **Railway**. These services provide persistent containers that won't delete your SQLite database, and they can handle the heavy Python background tasks.
