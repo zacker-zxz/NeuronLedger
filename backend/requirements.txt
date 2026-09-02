@@ -13,3 +13,4 @@ pydantic-settings==2.3.4
 web3
 openai
 python-dotenv
+google-generativeai
