@@ -8,7 +8,7 @@ import type {
 } from '../types';
 
 const api = axios.create({
-  baseURL: 'https://neuronledger.onrender.com/api',
+  baseURL: 'https://api.zackers.tech/api',
   headers: { 'Content-Type': 'application/json' },
 });
 
