@@ -34,8 +34,8 @@ export const ingestCSV = (file: File, name: string) => {
   const form = new FormData();
   form.append('file', file);
   form.append('name', name);
-  return axios
-    .post('/api/ingest/csv', form, { headers: { 'Content-Type': 'multipart/form-data' } })
+  return api
+    .post('/ingest/csv', form, { headers: { 'Content-Type': 'multipart/form-data' } })
     .then((r) => r.data);
 };
 
